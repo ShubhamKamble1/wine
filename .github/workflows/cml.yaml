@@ -14,6 +14,10 @@ jobs:
             REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Your ML workflow goes here
+          pip install --upgrade pip
+          python3.8 -m venv env
+          source env/bin/activate
+          echo "VIRTUAL ENV:" $VIRTUAL_ENV
           pip install -r requirements.txt
           python train.py
           
