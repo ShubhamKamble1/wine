@@ -2,9 +2,9 @@ name: model-wine-quality
 on: [push]
 jobs:
   run:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     # optionally use a convenient Ubuntu LTS + DVC + CML image
-#     container: docker://ghcr.io/iterative/cml:0-dvc2-base1
+    container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     steps:
 #       may need to setup NodeJS & Python3 on e.g. self-hosted
 #       - uses: actions/setup-node@v3.1.1
@@ -14,7 +14,7 @@ jobs:
 #         with:
 #           python-version: '3.x'
       - uses: actions/checkout@v2
-      - uses: iterative/setup-cml@v1
+#       - uses: iterative/setup-cml@v1
 #         with:
 #             version: '3.0.0'
       - name: cml_run
@@ -26,7 +26,7 @@ jobs:
           python train.py
           
           
-          type metrics.txt >> report.md
+          cat metrics.txt >> report.md
           
          
           cml-publish feature_importance.png --md >> report.md
