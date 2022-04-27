@@ -2,7 +2,7 @@ name: model-wine-quality
 on: [push]
 jobs:
   run:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     # optionally use a convenient Ubuntu LTS + DVC + CML image
     # container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     steps:
@@ -15,7 +15,7 @@ jobs:
       #   with:
       #     python-version: '3.x'
 #       - uses: iterative/setup-cml@v1
-      - name: Train model
+      - name: cml_run
         env:
             REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -23,7 +23,15 @@ jobs:
           pip install -r requirements.txt
           python train.py
           
-          type metrics.txt
+          echo "## Model metrics" > report.md
+          cat metrics.txt >> report.md
+          
+          echo "## Data visualization" >> report.md
+          cml-publish feature_importance.png --md >> report.md
+          cml-publish residuals.png --md >> report.md
+          
+          cml-send-comment report.md
+
           
 #       - name: Write CML report
 #         run: |
