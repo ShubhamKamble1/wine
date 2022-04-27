@@ -11,9 +11,9 @@ jobs:
       # - uses: actions/setup-node@v2
       #   with:
       #     node-version: '16'
-      # - uses: actions/setup-python@v2
-      #   with:
-      #     python-version: '3.x'
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
       - uses: iterative/setup-cml@v1
       - name: cml_run
         env:
@@ -31,10 +31,3 @@ jobs:
           cml-publish residuals.png --md >> report.md
           
           cml-send-comment report.md
-
-          
-#       - name: Write CML report
-#         run: |
-#           # Post reports as comments in GitHub PRs
-#           cat results.txt >> report.md
-#           cml-send-comment report.md
