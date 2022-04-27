@@ -4,17 +4,17 @@ jobs:
   run:
     runs-on: ubuntu-latest
     # optionally use a convenient Ubuntu LTS + DVC + CML image
-    container: docker://ghcr.io/iterative/cml:0-dvc2-base1
+#     container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     steps:
 #       may need to setup NodeJS & Python3 on e.g. self-hosted
-      - uses: actions/setup-node@v3.1.1
-        with:
-          node-version: '16'
+#       - uses: actions/setup-node@v3.1.1
+#         with:
+#           node-version: '16'
       - uses: actions/setup-python@v3.1.2
-        with:
-          python-version: '3.x'
-      - uses: actions/checkout@v2.4.2
+#         with:
+#           python-version: '3.x'
       - uses: iterative/setup-cml@v1
+      - uses: actions/checkout@v2
       - name: cml_run
         env:
             REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
