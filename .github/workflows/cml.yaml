@@ -16,7 +16,7 @@ jobs:
         run: |
           # Your ML workflow goes here
           pip install --upgrade pip
-          python3.8 -m venv env
+          Python\3.10.4 -m venv env
           source env/bin/activate
           pip install -r requirements.txt
           python train.py
