@@ -10,12 +10,12 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - name: Train model
+      - name: cml_run
         env:
             REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Your ML workflow goes here
-          sudo apt-get install <requirements.txt
+          pip install -r requirements.txt
           python train.py
           
           cat metrics.txt > report.md
