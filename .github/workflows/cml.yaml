@@ -15,7 +15,7 @@ jobs:
             REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Your ML workflow goes here
-          pip install --user -r requirements.txt
+          sudo -h pip install -r requirements.txt
           python train.py
           
           cat metrics.txt > report.md
