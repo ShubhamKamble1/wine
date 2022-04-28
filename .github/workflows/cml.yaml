@@ -3,9 +3,10 @@ on: [push]
 jobs:
   train-model:
     runs-on: ubuntu-latest
-    container: docker://ghcr.io/iterative/cml:0-dvc2-base1
+#     container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     steps:
       - uses: actions/checkout@v2
+      - uses: iterative/setup-cml@v1
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
@@ -17,10 +18,9 @@ jobs:
           pip install --upgrade pip
           python3.8 -m venv env
           source env/bin/activate
-          echo "VIRTUAL ENV:" $VIRTUAL_ENV
           pip install -r requirements.txt
           python train.py
           
-          cat metrics.txt >> report.md
+          type metrics.txt >> report.md
           cml-publish feature_importance.png --md >> report.md
           cml-send-comment report.md
