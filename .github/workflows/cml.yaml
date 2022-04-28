@@ -17,7 +17,7 @@ jobs:
           # Your ML workflow goes here
           pip3 install -r requirements.txt
           python train.py
-          type metrics.txt >> report.md
+          cat metrics.txt >> report.md
           cml publish feature_importance.png --md --title "Feature Importance" >> report.md
           cml publish residuals.png --md --title "Residuals" >> report.md          
           cml send-comment report.md
